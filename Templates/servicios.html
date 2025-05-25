@@ -1,0 +1,43 @@
+{% extends 'dashboard.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Servicios.</h1>
+    <h2>Servicios contratados por la empresa.</h2>
+    <br>
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in servicios %}
+                <tr>
+                    <td>{{ s.id_servicio }}</td>
+                    <td>{{ s.nombre }}</td>
+                    <td>{{ s.descripcion }}</td>
+                    <td>${{ s.precio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

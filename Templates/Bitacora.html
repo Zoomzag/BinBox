@@ -1,0 +1,49 @@
+{% extends 'dashboard.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Bitácora</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Registro de cambios.</h1>
+    <h2>Registro de cambios que se hacen en los recursos</h2>
+    <br>
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Tabla Afectada</th>
+                    <th>Stock</th>
+                    <th>Precio Unitario</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                <tr>
+                    <td>{{ registro.id_log }}</td>
+                    <td>{{ registro.usuario }}</td>
+                    <td>{{ registro.accion }}</td>
+                    <td>{{ registro.tabla_afectada }}</td>
+                    <td>{{ registro.fecha }}</td>
+                    <td><span class="status in-stock">✓</span></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No hay registros en la bitácora.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

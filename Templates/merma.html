@@ -1,0 +1,44 @@
+{% extends 'dashboard.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Merma.</h1>
+    <h2>Productos dañados, caducos o descontinuados.</h2>
+    <br>
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Motivo</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for merma in mermas %}
+                <tr>
+                    <td>{{ merma.id_merma }}</td>
+                    <td>{{ merma.id_producto }}</td>
+                    <td>{{ merma.cantidad }}</td>
+                    <td>{{ merma.motivo }}</td>
+                    <td>{{ merma.fecha }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{% extends 'dashboard.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Proveedores.</h1>
+    <h2>Proveedores de mercancia de la empresa.</h2>
+    <br>
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in proveedores %}
+                <tr>
+                    <td>{{ p.id_proveedor }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.telefono }}</td>
+                    <td>{{ p.correo }}</td>
+                    <td>{{ p.direccion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
