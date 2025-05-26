@@ -10,34 +10,66 @@
 
 <body>
     {% block content %}
-    <h1>Clientes.</h1>
-    <h2>Clientes que compran directo en almacen.</h2>
-    <br>
-    <div class="table-container">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Puntos</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                {% for c in clientes %}
-                <tr>
-                    <td>{{ c.id_cliente }}</td>
-                    <td>{{ c.nombre }}</td>
-                    <td>{{ c.correo }}</td>
-                    <td>{{ c.puntos }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-
-        </table>
+<h1>Clientes VIP</h1>
+<h2>Listado de clientes con beneficios</h2>
+<br>
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Puntos</th>
+                <th>Fecha Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.id_cliente }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.correo }}</td>
+                <td>{{ cliente.puntos }}</td>
+                <td>{{ cliente.fecha_registro|date:"d/m/Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay clientes VIP registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="form-container">
+    <div class="form-section">
+        <h3 class="form-title">Agregar cliente VIP</h3>
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" name="nombre" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="correo" placeholder="Correo electrónico" required>
+                </div>
+            </div>
+            <button type="submit" name="accion" value="agregar" class="btn btn-primary">Agregar cliente VIP</button>
+        </form>
     </div>
-    {% endblock %}
+
+    <div class="form-section delete-section">
+        <h3 class="form-title">Eliminar cliente VIP</h3>
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" name="id_cliente" placeholder="ID del cliente a eliminar" required>
+            </div>
+            <button type="submit" name="accion" value="eliminar" class="btn btn-danger">Eliminar cliente VIP</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
 </body>
 
 </html>

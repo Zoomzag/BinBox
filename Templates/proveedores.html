@@ -9,36 +9,74 @@
 </head>
 
 <body>
-    {% block content %}
-    <h1>Proveedores.</h1>
-    <h2>Proveedores de mercancia de la empresa.</h2>
-    <br>
-    <div class="table-container">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    <th>Dirección</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for p in proveedores %}
-                <tr>
-                    <td>{{ p.id_proveedor }}</td>
-                    <td>{{ p.nombre }}</td>
-                    <td>{{ p.telefono }}</td>
-                    <td>{{ p.correo }}</td>
-                    <td>{{ p.direccion }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-
-        </table>
+   {% block content %}
+<h1>Proveedores</h1>
+<h2>Listado de proveedores</h2>
+<br>
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in proveedores %}
+            <tr>
+                <td>{{ proveedor.id_proveedor }}</td>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.correo }}</td>
+                <td>{{ proveedor.direccion }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay proveedores registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="form-container">
+    <div class="form-section">
+        <h3 class="form-title">Agregar proveedor</h3>
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre del proveedor" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" name="telefono" placeholder="Teléfono" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="correo" placeholder="Correo electrónico" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea name="direccion" placeholder="Dirección" required></textarea>
+            </div>
+            <button type="submit" name="accion" value="agregar" class="btn btn-primary">Agregar proveedor</button>
+        </form>
     </div>
-    {% endblock %}
+
+    <div class="form-section delete-section">
+        <h3 class="form-title">Eliminar proveedor</h3>
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" name="id_proveedor" placeholder="ID del proveedor a eliminar" required>
+            </div>
+            <button type="submit" name="accion" value="eliminar" class="btn btn-danger">Eliminar proveedor</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
 </body>
 
 </html>
