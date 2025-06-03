@@ -36,10 +36,11 @@
                     <td>
                         {% if producto.cantidad == 0 %}
                         <span class="status out-of-stock">Agotado</span>
-                        {% elif producto.cantidad <= 10 %} <span class="status low-stock">Bajo Stock</span>
-                            {% else %}
-                            <span class="status in-stock">En Stock</span>
-                            {% endif %}
+                        {% elif producto.cantidad <= 10 %}
+                        <span class="status low-stock">Bajo Stock</span>
+                        {% else %}
+                        <span class="status in-stock">En Stock</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% empty %}
@@ -50,6 +51,7 @@
             </tbody>
         </table>
     </div>
+
     <div class="form-container">
         <div class="form-section">
             <h3 class="form-title">Agregar producto</h3>
@@ -80,7 +82,7 @@
 
         <div class="form-section delete-section">
             <h3 class="form-title">Eliminar producto</h3>
-            <form method="post" class="product-form">
+            <form method="post" class="product-form" id="eliminarForm">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="number" name="id_producto" placeholder="ID del producto a eliminar" required>
@@ -90,6 +92,31 @@
         </div>
     </div>
     {% endblock %}
+
+    <!-- Script para confirmación de eliminación -->
+   <script>
+    const productos = {
+        {% for producto in productos %}
+            "{{ producto.id_producto }}": "{{ producto.nombre|escapejs }}"{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    };
+
+    document.getElementById('eliminarForm').addEventListener('submit', function(event) {
+        const inputID = this.querySelector('input[name="id_producto"]').value.trim();
+        const nombre = productos[inputID];
+
+        if (!nombre) {
+            alert("No se encontró un producto con ese ID.");
+            event.preventDefault();
+            return;
+        }
+
+        const confirmar = confirm(`¿Estás seguro de que deseas eliminar el producto "${nombre}" (ID: ${inputID})?`);
+        if (!confirmar) {
+            event.preventDefault();
+        }
+    });
+</script>
 </body>
 
 </html>

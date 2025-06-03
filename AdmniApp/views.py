@@ -46,7 +46,7 @@ def almacen_view(request):
             precio_com = float(request.POST['precio_com'])
             precio_venta = float(request.POST['precio_venta'])
             categoria = request.POST['categoria']
-            # ¡No obtenemos ni usamos fecha_ingreso!
+           
 
             with connection.cursor() as cursor:
                 cursor.callproc('AgregarProducto', [

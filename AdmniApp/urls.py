@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from . import views  # o desde donde tengas tu vista login_view
-
+from . import views 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),

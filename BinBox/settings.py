@@ -25,8 +25,11 @@ SECRET_KEY = "django-insecure-txl^d$8&qv!l24*rbxxjj#b0zm8u&2pjb-2$+(ph_@_n$06waw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://fe05-2806-2f0-331-2400-44f-ea64-2fb4-2268.ngrok-free.app',
+]
 
 # Application definition
 
@@ -78,15 +81,13 @@ WSGI_APPLICATION = "BinBox.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SAA',
+        'NAME': 'SAA_federada',
         'USER': 'root',
         'PASSWORD': 'loya1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
